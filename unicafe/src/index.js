@@ -38,17 +38,19 @@ const Statistics = ({ goodStat, neutralStat, badStat }) => {
     <div>
       <h2>Statistics</h2>
       <table>
-        <Statistic stat={goodStat} text="good" />
-        <Statistic stat={neutralStat} text="neutral" />
-        <Statistic stat={badStat} text="bad" />
-        <Statistic
-          stat={calculateAverage(goodStat, badStat, sum)}
-          text="average"
-        />
-        <Statistic
-          stat={calculatePercentGood(goodStat, sum) + "%"}
-          text="positive"
-        />
+        <tbody>
+          <Statistic stat={goodStat} text="good" />
+          <Statistic stat={neutralStat} text="neutral" />
+          <Statistic stat={badStat} text="bad" />
+          <Statistic
+            stat={calculateAverage(goodStat, badStat, sum)}
+            text="average"
+          />
+          <Statistic
+            stat={calculatePercentGood(goodStat, sum) + "%"}
+            text="positive"
+          />
+        </tbody>
       </table>
     </div>
   );
