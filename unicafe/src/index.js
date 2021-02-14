@@ -26,20 +26,25 @@ const Statistics = ({ goodStat, neutralStat, badStat }) => {
   };
 
   if (sum === 0) {
-    return <p>No feedback given</p>;
+    return (
+      <div>
+        <h2>Statistics</h2>
+        <p>No feedback given</p>
+      </div>
+    );
   }
 
   return (
     <div>
       <h2>Statistics</h2>
-      <IndividualStat stat={goodStat} text="good" />
-      <IndividualStat stat={neutralStat} text="neutral" />
-      <IndividualStat stat={badStat} text="bad" />
-      <IndividualStat
+      <Statistic stat={goodStat} text="good" />
+      <Statistic stat={neutralStat} text="neutral" />
+      <Statistic stat={badStat} text="bad" />
+      <Statistic
         stat={calculateAverage(goodStat, badStat, sum)}
         text="average"
       />
-      <IndividualStat
+      <Statistic
         stat={calculatePercentGood(goodStat, sum) + "%"}
         text="positive"
       />
@@ -47,7 +52,7 @@ const Statistics = ({ goodStat, neutralStat, badStat }) => {
   );
 };
 
-const IndividualStat = (props) => (
+const Statistic = (props) => (
   <p>
     {props.text} {props.stat}
   </p>
