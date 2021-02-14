@@ -8,6 +8,7 @@ const Button = ({ clickHandler, text }) => (
 const App = (props) => {
   const [selected, setSelected] = useState(0);
   const [points, setPoints] = useState(new Array(anecdotes.length).fill(0));
+  const [mostVotes, setMostVotes] = useState(0);
 
   const changeAnecdote = () => {
     const newSelected = Math.floor(Math.random() * anecdotes.length);
@@ -17,16 +18,27 @@ const App = (props) => {
   const changePoints = () => {
     const newPoints = [...points];
     newPoints[selected] += 1;
+    if (newPoints[selected] > newPoints[mostVotes]) {
+      setMostVotes(selected);
+    }
     setPoints(newPoints);
   };
 
   return (
-    <div>
-      <p>{props.anecdotes[selected]}</p>
-      <p>has {points[selected]} votes</p>
-      <Button clickHandler={changePoints} text="vote" />
-      <Button clickHandler={changeAnecdote} text="next anecdote" />
-    </div>
+    <section>
+      <div>
+        <h2>Anendote of the day</h2>
+        <p>{props.anecdotes[selected]}</p>
+        <p>has {points[selected]} votes</p>
+        <Button clickHandler={changePoints} text="vote" />
+        <Button clickHandler={changeAnecdote} text="next anecdote" />
+      </div>
+      <div>
+        <h2>Anecdote with most votes</h2>
+        <p>{props.anecdotes[mostVotes]}</p>
+        <p>has {points[mostVotes]} votes</p>
+      </div>
+    </section>
   );
 };
 
