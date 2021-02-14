@@ -1,22 +1,31 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-const Button = ({ changeSelected }) => (
-  <button onClick={changeSelected}>next anecdote</button>
+const Button = ({ clickHandler, text }) => (
+  <button onClick={clickHandler}>{text}</button>
 );
 
 const App = (props) => {
   const [selected, setSelected] = useState(0);
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0));
 
   const changeAnecdote = () => {
     const newSelected = Math.floor(Math.random() * anecdotes.length);
     setSelected(newSelected);
   };
 
+  const changePoints = () => {
+    const newPoints = [...points];
+    newPoints[selected] += 1;
+    setPoints(newPoints);
+  };
+
   return (
     <div>
       <p>{props.anecdotes[selected]}</p>
-      <Button changeSelected={changeAnecdote} />
+      <p>has {points[selected]} votes</p>
+      <Button clickHandler={changePoints} text="vote" />
+      <Button clickHandler={changeAnecdote} text="next anecdote" />
     </div>
   );
 };
