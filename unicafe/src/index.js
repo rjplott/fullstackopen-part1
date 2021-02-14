@@ -15,25 +15,19 @@ const Button = (props) => (
 );
 
 const Statistics = ({ goodStat, neutralStat, badStat }) => {
-  const calculateAverage = (good, neutral, bad) => {
-    const sum = good + neutral + bad;
+  const sum = goodStat + neutralStat + badStat;
 
-    if (sum === 0) {
-      return 0;
-    } else {
-      return (good - bad) / sum;
-    }
+  const calculateAverage = (good, bad, sum) => {
+    return (good - bad) / sum;
   };
 
-  const calculatePercentGood = (good, neutral, bad) => {
-    const sum = good + neutral + bad;
-
-    if (sum === 0) {
-      return 0;
-    } else {
-      return (good / sum) * 100;
-    }
+  const calculatePercentGood = (good, sum) => {
+    return (good / sum) * 100;
   };
+
+  if (sum === 0) {
+    return <p>No feedback given</p>;
+  }
 
   return (
     <div>
@@ -42,11 +36,11 @@ const Statistics = ({ goodStat, neutralStat, badStat }) => {
       <IndividualStat stat={neutralStat} text="neutral" />
       <IndividualStat stat={badStat} text="bad" />
       <IndividualStat
-        stat={calculateAverage(goodStat, neutralStat, badStat)}
+        stat={calculateAverage(goodStat, badStat, sum)}
         text="average"
       />
       <IndividualStat
-        stat={calculatePercentGood(goodStat, neutralStat, badStat) + "%"}
+        stat={calculatePercentGood(goodStat, sum) + "%"}
         text="positive"
       />
     </div>
